@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllServices = () => {
   const [services, setServices] = useState([]);
@@ -23,7 +24,7 @@ const AllServices = () => {
       <div className="grid grid-cols-1 gap-6">
         {services.map((service) => (
           <div key={service.id} className="p-6 bg-white rounded-lg shadow-md">
-            <img src={service.image} alt={service.title} className="w-full h-48 object-cover rounded-md" />
+            <img src={service.image} alt={service.title} className="w-full h-[400px] object-cover rounded-md" />
             <h2 className="text-xl font-semibold mt-4">{service.title}</h2>
             <p className="text-gray-700 mt-2">
               {service.description.length > 100
@@ -38,9 +39,12 @@ const AllServices = () => {
             </div>
             <p className="text-gray-700 mt-2">Area: {service.area}</p>
             <p className="text-gray-700 mt-2">Price: ${service.service_price.toFixed(2)}</p>
-            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+           <Link to={`/service-details/${service._id}`}>
+           
+           <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
               View Detail
             </button>
+           </Link>
           </div>
         ))}
       </div>
