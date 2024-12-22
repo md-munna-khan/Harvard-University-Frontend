@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import { Link } from "react-router-dom";
 
 
 const PopularServices = () => {
@@ -17,11 +18,21 @@ const PopularServices = () => {
   }
     return (
         <div>
-             <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 '>
-         {
-            services.map(service=><ServiceCard  key={service._id} service={service}></ServiceCard>)
-         }
+            <div>
+                <h1 className="text-3xl md:text-5xl font-bold text-center">Popular services</h1>
+            </div>
+             <div className='grid grid-cols-1 gap-2 my-10 md:grid-cols-2 mx-auto '>
+             
+        {services.slice(0, 6).map((service) => (
+          <ServiceCard key={service.id} service={service} />
+        ))}
+   
           </div>
+          <div className="text-center justify-center mx-auto">
+      <Link to='/all-services'>
+       <button className="p-4   my-10 bg-cyan-600">Show All Services</button>
+       </Link>
+      </div>
         </div>
     );
 };
