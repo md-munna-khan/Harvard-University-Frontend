@@ -1,9 +1,12 @@
-import React from 'react';
+import PopularServices from "../components/PopularServices";
+import Slider from "../components/Slider";
+
 
 const Home = () => {
     return (
         <div>
-            home
+           <Slider></Slider>
+           <PopularServices></PopularServices>
         </div>
     );
 };

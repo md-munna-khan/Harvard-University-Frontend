@@ -4,6 +4,10 @@ import Home from "../pages/Home";
 import ErrorPage from "../components/ErrorPage";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
+import AddService from "../pages/AddService";
+import ManageServices from "../pages/ManageServices";
+import BookedServices from "../pages/BookedServices";
+import ServiceToDo from "../pages/ServiceToDo";
 
 const router = createBrowserRouter([
 {
@@ -22,6 +26,22 @@ const router = createBrowserRouter([
           {
             path: '/registration',
             element: <Register />,
+          },
+          {
+            path:'/add-service',
+            element:<AddService></AddService>,
+          },
+          {
+            path:'/manage-services',
+            element:<ManageServices></ManageServices>,
+          },
+          {
+            path:'/booked-services',
+            element:<BookedServices></BookedServices>,
+          },
+          {
+            path:'/service-to-do',
+            element:<ServiceToDo></ServiceToDo>,
           },
     ]
 }
