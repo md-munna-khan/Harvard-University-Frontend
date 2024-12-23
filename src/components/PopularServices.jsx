@@ -30,7 +30,7 @@ const PopularServices = () => {
           </div>
           <div className="text-center justify-center mx-auto">
       <Link to='/all-services'>
-       <button className="p-4   my-10 bg-cyan-600">Show All Services</button>
+       <button className="p-4 text-white  my-10 bg-blue-500">Show All Services</button>
        </Link>
       </div>
         </div>

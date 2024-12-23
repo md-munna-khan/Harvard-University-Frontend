@@ -49,6 +49,8 @@ const BookNow = () => {
             currentUserEmail: user?.email,
             currentUserName: user?.displayName,
             serviceTakingDate: startDate,
+            description:description,
+            area:area,
             status: "pending",
         };
 
