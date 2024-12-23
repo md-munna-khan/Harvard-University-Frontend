@@ -1,9 +1,8 @@
 
 
-
 import DatePicker from "react-datepicker";
 import { AuthContext } from "../providers/AuthProvider";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -12,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const BookNow = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [job, setJob] = useState({});
+    const [service, setService] = useState({});
     const [startDate, setStartDate] = useState(new Date());
     const { id } = useParams();
 
@@ -22,17 +21,18 @@ const BookNow = () => {
 
     const fetchJobData = async () => {
         const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/service/${id}`);
-        setJob(data);
+        setService(data);
     };
 
     const {
         image,
         title,
+        _id,
         buyer: { email: buyerEmail, name: buyerName, photo: buyerPhoto } = {},
         area,
         service_price,
         description,
-    } = job || {};
+    } = service|| {};
 
     const handleBidSubmit = async (e) => {
         e.preventDefault();
@@ -56,7 +56,7 @@ const BookNow = () => {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-book`, bookData);
             form.reset();
             toast.success("Booking placed successfully");
-            navigate('/my-bookings');
+            navigate('/booked-services');
         } catch (err) {
             console.log(err);
             toast.error(err.response.data);
@@ -70,7 +70,7 @@ const BookNow = () => {
 
                 <form onSubmit={handleBidSubmit}>
                     <div>
-                        <label className='text-gray-700' readOnly htmlFor='serviceImage'>Service Image</label>
+                        <label className='text-gray-700' htmlFor='serviceImage'>Service Image</label>
                         <img src={image} alt={title} className='block w-full h-auto mt-2 rounded-md' />
                     </div>
                     <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
@@ -195,4 +195,3 @@ const BookNow = () => {
 };
 
 export default BookNow;
-

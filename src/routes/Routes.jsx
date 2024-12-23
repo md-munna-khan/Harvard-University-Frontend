@@ -6,13 +6,16 @@ import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import AddService from "../pages/AddService";
 import ManageServices from "../pages/ManageServices";
-import BookedServices from "../pages/BookedServices";
+
 import ServiceToDo from "../pages/ServiceToDo";
 import AllServices from "../pages/AllServices";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../components/ServiceDetails";
 import BookNow from "../components/BookNow";
 import UpdateService from "../components/UpdateService";
+import MyBookedServices from "../pages/MyBookedServices";
+
+
 
 const router = createBrowserRouter([
 {
@@ -38,11 +41,11 @@ const router = createBrowserRouter([
           },
           {
             path:'/manage-services',
-            element:<ManageServices></ManageServices>,
+            element:<PrivateRoute><ManageServices></ManageServices></PrivateRoute>,
           },
           {
             path:'/booked-services',
-            element:<BookedServices></BookedServices>,
+            element:<PrivateRoute><MyBookedServices></MyBookedServices></PrivateRoute>,
           },
           {
             path:'/service-to-do',
@@ -54,7 +57,7 @@ const router = createBrowserRouter([
           },
           {
             path:'/service-details/:id',
-            element:<ServiceDetails></ServiceDetails>,
+            element:<PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>,
           },
           {
             path:'/book-now/:id',
@@ -64,6 +67,9 @@ const router = createBrowserRouter([
             path:'/update/:id',
             element:<UpdateService></UpdateService>,
           },
+          
+        
+          
     ]
 }
 ])
