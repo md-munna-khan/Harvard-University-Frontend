@@ -12,6 +12,7 @@ import AllServices from "../pages/AllServices";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../components/ServiceDetails";
 import BookNow from "../components/BookNow";
+import UpdateService from "../components/UpdateService";
 
 const router = createBrowserRouter([
 {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
           {
             path:'/book-now/:id',
             element:<BookNow></BookNow>,
+          },
+          {
+            path:'/update/:id',
+            element:<UpdateService></UpdateService>,
           },
     ]
 }

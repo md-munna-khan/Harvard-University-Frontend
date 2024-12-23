@@ -1,15 +1,34 @@
+
+
 import axios from "axios"
 import toast from "react-hot-toast"
 // import useAuth from "../hooks/useAuth"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../providers/AuthProvider"
+import { useParams } from "react-router-dom"
 // import { useNavigate } from "react-router-dom"
 
 
-const AddService = () => {
+const UpdateService = () => {
     // const navigate = useNavigate()
     const { user } = useContext(AuthContext)
-   
+    const {id}=useParams()
+    const [services, setServices] = useState([]);
+    useEffect(() => {
+        fetchAllServices();
+      }, [id]);
+    
+      const fetchAllServices = async () => {
+        try {
+          const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/service/${id}`);
+          setServices(data);
+        } catch (error) {
+          console.error("Error fetching services:", error);
+        }
+      };
+      console.log(services);
+
+
     const handleSubmit = async e => {
       e.preventDefault()
       const form = e.target
@@ -40,7 +59,7 @@ const AddService = () => {
       console.log(formData)
       try {
         // 1. make a post request
-        await axios.post(`${import.meta.env.VITE_API_URL}/add-services`, formData)
+        await axios.post(`${import.meta.env.VITE_API_URL}/update-service/${id}`, formData)
         // 2. Reset form
         form.reset()
         // 3. Show toast and navigate
@@ -56,7 +75,7 @@ const AddService = () => {
       <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
         <section className=' p-2 md:p-6 mx-auto bg-white rounded-md shadow-md '>
           <h2 className='text-lg font-semibold text-gray-700 capitalize '>
-            Post a Service
+            update a Service
           </h2>
   
           <form onSubmit={handleSubmit}>
@@ -151,7 +170,4 @@ const AddService = () => {
 
 
 
-
-    
-
-export default AddService;
+export default UpdateService;
