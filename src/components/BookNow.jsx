@@ -1,57 +1,198 @@
+
+
+
+import DatePicker from "react-datepicker";
+import { AuthContext } from "../providers/AuthProvider";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Loading from "./Loading";
+import "react-datepicker/dist/react-datepicker.css";
 
-const ServiceDetails = () => {
-  const [service, setService] = useState(null);
-  const { id } = useParams();
+const BookNow = () => {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [job, setJob] = useState({});
+    const [startDate, setStartDate] = useState(new Date());
+    const { id } = useParams();
 
-  useEffect(() => {
-    fetchService();
-  }, [id]);
+    useEffect(() => {
+        fetchJobData();
+    }, [id]);
 
-  const fetchService = async () => {
-    try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/service/${id}`);
-      setService(data);
-    } catch (error) {
-      console.error("Error fetching service:", error);
-    }
-  };
+    const fetchJobData = async () => {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/service/${id}`);
+        setJob(data);
+    };
 
-  if (!service) {
-    return <Loading />;
-  }
+    const {
+        image,
+        title,
+        buyer: { email: buyerEmail, name: buyerName, photo: buyerPhoto } = {},
+        area,
+        service_price,
+        description,
+    } = job || {};
 
-  const { image, title, buyer, area, service_price, description } = service;
+    const handleBidSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const comment = form.comment.value;
+        const bookData = {
+            price: service_price,
+            comment,
+            serviceId: id,
+            serviceName: title,
+            serviceImage: image,
+            providerEmail: buyerEmail,
+            providerName: buyerName,
+            currentUserEmail: user?.email,
+            currentUserName: user?.displayName,
+            serviceTakingDate: startDate,
+            status: "pending",
+        };
 
-  return (
-    <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md overflow-hidden lg:flex">
-      <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />
-      <div className="lg:ml-4 lg:flex lg:flex-col lg:justify-between">
-        <div className="px-6 py-4">
-          <div className="font-bold text-2xl mb-2">{title}</div>
-          <p className="text-gray-700 text-base mb-4">{description}</p>
-          <Link to={`/service-details/${id}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              View Detail
-            </button>
-          </Link>
+        try {
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-book`, bookData);
+            form.reset();
+            toast.success("Booking placed successfully");
+            navigate('/my-bookings');
+        } catch (err) {
+            console.log(err);
+            toast.error(err.response.data);
+        }
+    };
+
+    return (
+        <div>
+            <section className='p-6 w-full bg-white rounded-md shadow-md flex-1 md:min-h-[350px]'>
+                <h2 className='text-lg font-semibold text-gray-700 capitalize'>Place A Booking</h2>
+
+                <form onSubmit={handleBidSubmit}>
+                    <div>
+                        <label className='text-gray-700' readOnly htmlFor='serviceImage'>Service Image</label>
+                        <img src={image} alt={title} className='block w-full h-auto mt-2 rounded-md' />
+                    </div>
+                    <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
+                        <div>
+                            <label className='text-gray-700' htmlFor='serviceId'>Service ID</label>
+                            <input
+                                id='serviceId'
+                                type='text'
+                                name='serviceId'
+                                value={id}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='serviceName'>Service Name</label>
+                            <input
+                                id='serviceName'
+                                type='text'
+                                name='serviceName'
+                                value={title}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='providerEmail'>Provider Email</label>
+                            <input
+                                id='providerEmail'
+                                type='text'
+                                name='providerEmail'
+                                value={buyerEmail}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='providerName'>Provider Name</label>
+                            <input
+                                id='providerName'
+                                type='text'
+                                name='providerName'
+                                value={buyerName}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='currentUserEmail'>Current User Email</label>
+                            <input
+                                id='currentUserEmail'
+                                type='text'
+                                name='currentUserEmail'
+                                value={user?.email}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='currentUserName'>Current User Name</label>
+                            <input
+                                id='currentUserName'
+                                type='text'
+                                name='currentUserName'
+                                value={user?.displayName}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='servicePrice'>Service Price</label>
+                            <input
+                                id='servicePrice'
+                                type='text'
+                                name='servicePrice'
+                                value={service_price}
+                                readOnly
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            />
+                        </div>
+
+                        <div>
+                            <label className='text-gray-700' htmlFor='serviceTakingDate'>Service Taking Date</label>
+                            <DatePicker
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                                dateFormat='MMMM d, yyyy'
+                                minDate={new Date()}
+                            />
+                        </div>
+
+                        <div className='col-span-2'>
+                            <label className='text-gray-700' htmlFor='comment'>Special Instruction</label>
+                            <textarea
+                                id='comment'
+                                name='comment'
+                                rows='4'
+                                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring'
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div className='flex justify-end mt-6'>
+                        <button
+                            type='submit'
+                            className='px-6 py-2 leading-5 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700'
+                        >
+                            Purchase
+                        </button>
+                    </div>
+                </form>
+            </section>
         </div>
-        <div className="px-6 py-4 flex items-center border-t mt-4">
-          <img className="w-10 h-10 rounded-full mr-4" src={buyer?.photo} alt={buyer?.name} />
-          <div className="text-sm">
-            <p className="text-gray-900 leading-none">{buyer?.name}</p>
-            <p className="text-gray-600">{area}</p>
-          </div>
-          <div className="ml-auto text-right">
-            <span className="text-gray-900 font-bold">${service_price}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default ServiceDetails;
+export default BookNow;
+
