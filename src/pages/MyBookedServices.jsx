@@ -55,6 +55,7 @@ const MyBookedServices = () => {
                                     <thead className="bg-gray-50">
                                         <tr>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Image</th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Date</th>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Service Name</th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">Price</th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">Service Area</th>

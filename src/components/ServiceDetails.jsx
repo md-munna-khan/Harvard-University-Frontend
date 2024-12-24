@@ -22,7 +22,7 @@ const {id} = useParams()
     if (!services) {
       return <Loading></Loading> ;
   }
-    const { image, title, buyer,  area, service_price, description, _id} = services || {};
+    const { image, title, buyer,  area, service_price, description, serviceId} = services || {};
     return (
       <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md overflow-hidden lg:flex">
       <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />

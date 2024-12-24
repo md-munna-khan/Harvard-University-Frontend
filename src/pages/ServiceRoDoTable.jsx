@@ -1,16 +1,15 @@
 
-
-const BookTableRow = ({ book, handleStatusChange }) => {
-    const {serviceImage,  serviceName,  area,serviceTakingDate,   price,  description, status, _id } = book || {};
+const ServiceRoDoTable= ({ book, handleStatusChange }) => {
+    const {serviceImage,  serviceName,  area, serviceTakingDate,   price,  description, status, _id } = book || {};
 
     return (
         <tr>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                 <img src={serviceImage} alt={ serviceName} className="w-10 h-10 object-cover" />
             </td>
-            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
-{serviceTakingDate}
-  </td>
+            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+            {serviceTakingDate}
+            </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                 { serviceName}
             </td>
@@ -45,4 +44,6 @@ const BookTableRow = ({ book, handleStatusChange }) => {
     );
 };
 
-export default BookTableRow;
+
+
+export default ServiceRoDoTable;
