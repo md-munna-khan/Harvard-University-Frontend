@@ -46,7 +46,7 @@ const Subscription = () => {
   ];
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen p-8">
+    <div className="bg-gray-100 dark:bg-gray-900 my-10 min-h-screen p-8">
       <header className="text-center mb-12">
         <h1 className="text-4xl dark:text-gray-200 font-semibold text-gray-800">
           University Subscription Plans
