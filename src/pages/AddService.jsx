@@ -3,6 +3,7 @@ import toast from "react-hot-toast"
 // import useAuth from "../hooks/useAuth"
 import { useContext } from "react"
 import { AuthContext } from "../providers/AuthProvider"
+import DynamicTitle from "../components/DynamicTitle"
 // import { useNavigate } from "react-router-dom"
 
 
@@ -54,6 +55,7 @@ const AddService = () => {
   
     return (
       <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
+        <DynamicTitle></DynamicTitle>
         <section className=' p-2 md:p-6 mx-auto bg-white rounded-md shadow-md '>
           <h2 className='text-lg font-semibold text-gray-700 capitalize '>
             Post a Service

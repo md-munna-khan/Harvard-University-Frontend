@@ -24,20 +24,21 @@ const {id} = useParams()
   }
     const { image, title, buyer,  area, service_price, description, serviceId} = services || {};
     return (
-      <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md overflow-hidden lg:flex">
+      <div className="max-w-4xl mx-auto p-4 bg-white  items-center justify-center my-20  rounded-lg shadow-md overflow-hidden lg:flex">
       <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />
       <div className="lg:ml-4 lg:flex lg:flex-col lg:justify-between">
         <div className="px-6 py-4">
           <div className="font-bold text-2xl mb-2">{title}</div>
           <p className="text-gray-700 text-base mb-4">{description}</p>
+          <div className="">
+            <span className="text-gray-900 font-bold">price:${service_price}</span>
+          </div>
           <Link to={`/book-now/${id}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-blue-500 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Book Now
             </button>
           </Link>
-          <div className="ml-auto text-right">
-            <span className="text-gray-900 font-bold">price:${service_price}</span>
-          </div>
+          
         </div>
         <div className="px-6 py-4 flex items-center border-t mt-4">
           <img className="w-10 h-10 rounded-full mr-4" src={buyer?.photo} alt={buyer?.name} />

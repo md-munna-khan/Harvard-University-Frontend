@@ -6,6 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import DynamicTitle from "../components/DynamicTitle";
 
 const ManageServices = () => {
   const { user } = useContext(AuthContext);
@@ -56,6 +57,9 @@ const ManageServices = () => {
 
   return (
     <div>
+      <DynamicTitle>
+        
+      </DynamicTitle>
       <section className='container px-4 mx-auto pt-12'>
         <div className='flex items-center gap-x-3'>
           <h2 className='text-lg font-medium text-gray-800 '>My Posted Services</h2>
