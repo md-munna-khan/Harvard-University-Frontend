@@ -13,6 +13,7 @@ import {
 
 // import axios from 'axios'
 import { app } from '../firebse/fireabse.init'
+import axios from 'axios'
 
 
 export const AuthContext = createContext(null)
@@ -51,41 +52,42 @@ const AuthProvider = ({ children }) => {
     })
   }
 
-      // state change
-      useEffect(()=>{
-        const unSubsCribe = onAuthStateChanged(auth,(currentUser)=>{
-            setUser(currentUser)
-            setLoading(false)
-        });
-        return()=>{
-            unSubsCribe()
-        }
-       },[])
+      // // state change
+      // useEffect(()=>{
+      //   const unSubsCribe = onAuthStateChanged(auth,(currentUser)=>{
+      //       setUser(currentUser)
+      //       setLoading(false)
+      //   });
+      //   return()=>{
+      //       unSubsCribe()
+      //   }
+      //  },[])
+
   // onAuthStateChange
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth,async currentUser => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth,async currentUser => {
       
-//       console.log('CurrentUser-->', currentUser)
-// if(currentUser?.email){
-//   setUser(currentUser)
-//   const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{
-//     email:currentUser?.email
-//   }, {withCredentials:true}
-// )
-//   console.log(data)
-// }else{
-//   setUser(currentUser)
+      console.log('CurrentUser-->', currentUser)
+if(currentUser?.email){
+  setUser(currentUser)
+  const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{
+    email:currentUser?.email
+  }, {withCredentials:true}
+)
+  console.log(data)
+}else{
+  setUser(currentUser)
 
-//   const {data}= await axios.get(`${import.meta.env.VITE_API_URL}/clear-cookie`,
-//      {withCredentials:true}
-// )
+  const {data}= await axios.get(`${import.meta.env.VITE_API_URL}/clear-cookie`,
+     {withCredentials:true}
+)
 
-// }  setLoading(false)
-//     })
-//     return () => {
-//       return unsubscribe()
-//     }
-//   }, [])
+}  setLoading(false)
+    })
+    return () => {
+      return unsubscribe()
+    }
+  }, [])
 
   const authInfo = {
     user,

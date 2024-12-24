@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import AdmissionForm from "../components/AdmissionForm";
+
 import DynamicTitle from "../components/DynamicTitle";
 import PopularServices from "../components/PopularServices";
 import Slider from "../components/Slider";
 import { AuthContext } from "../providers/AuthProvider";
+import VarsityPrograms from "../extraSection/VarsityPrograms";
+import SubsCription from "../extraSection/SubsCription";
 
 
 const Home = () => {
@@ -14,7 +16,8 @@ const Home = () => {
             <DynamicTitle></DynamicTitle>
            <Slider></Slider>
            <PopularServices></PopularServices>
-           <AdmissionForm></AdmissionForm>
+         <VarsityPrograms></VarsityPrograms>
+         <SubsCription></SubsCription>
         </div>
     );
 };

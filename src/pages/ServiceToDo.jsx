@@ -10,8 +10,10 @@ import Loading from "../components/Loading";
 
 import ServiceRoDoTable from "./ServiceRoDoTable";
 import DynamicTitle from "../components/DynamicTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ServiceToDo = () => {
+    const axiosSecure =useAxiosSecure()
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,12 +26,21 @@ const ServiceToDo = () => {
 
     const fetchBookedServices = async () => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/bookings-requests/${user?.email}`);
+            const { data } = await axiosSecure.get(`/bookings-requests/${user?.email}`, );
            setBookings(data);
         } catch (error) {
             console.error("Error fetching booked services:", error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleStatusChange = async (id, newStatus) => {
+        try {
+            await axios.put(`${import.meta.env.VITE_API_URL}/bookings-requests/${id}`, { status: newStatus });
+            setBookings((prevBookings) => prevBookings.map((book) => (book._id === id ? { ...book, status: newStatus } : book)));
+        } catch (error) {
+            console.error("Error updating service status:", error); 
         }
     };
 
@@ -71,7 +82,7 @@ const ServiceToDo = () => {
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
                                       {
-                                        bookings.map(book=> <ServiceRoDoTable key={book._id}book={book}></ServiceRoDoTable>)
+                                        bookings.map(book=> <ServiceRoDoTable key={book._id}book={book} handleStatusChange={handleStatusChange}></ServiceRoDoTable>)
                                       }
                                     </tbody>
                                 </table>

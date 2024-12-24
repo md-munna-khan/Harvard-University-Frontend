@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import DynamicTitle from "../components/DynamicTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageServices = () => {
+  const axiosSecure =useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [services, setServices] = useState([]);
 
@@ -18,7 +20,7 @@ const ManageServices = () => {
 
   const fetchAllServices = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/services/${user?.email}`);
+      const { data } = await axiosSecure.get(`/services/${user?.email}`);
       setServices(data);
     } catch (error) {
       console.error("Error fetching services:", error);
@@ -39,9 +41,10 @@ const ManageServices = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/service/${id}`);
+          const { data } = await axiosSecure.delete(`/service/${id}`);
           toast.success('Deleted successfully');
           fetchAllServices();
+          console.log(data)
           Swal.fire({
             title: "Deleted!",
             text: "Your service has been deleted.",

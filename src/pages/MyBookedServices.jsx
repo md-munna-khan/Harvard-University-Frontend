@@ -85,15 +85,18 @@
 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import axios from "axios";
+
 
 import Loading from "../components/Loading";
 import BookTableRow from "../components/BookTableRow";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+
 import DynamicTitle from "../components/DynamicTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+
 
 const MyBookedServices = () => {
+    const axiosSecure =useAxiosSecure()
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -106,10 +109,10 @@ const MyBookedServices = () => {
 
     const fetchBookedServices = async () => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/bookings/${user?.email}`);
+            const { data } = await axiosSecure.get(`/bookings/${user?.email}`);
            setBookings(data);
         } catch (error) {
-            console.error("Error fetching booked services:", error);
+            toast.error("Error fetching booked services:", error);
         } finally {
             setLoading(false);
         }
@@ -142,6 +145,7 @@ const MyBookedServices = () => {
                                     <thead className="bg-gray-50">
                                         <tr>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Image</th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">email</th>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Date</th>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Service Name</th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">Price</th>

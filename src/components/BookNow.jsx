@@ -8,8 +8,10 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const BookNow = () => {
+    const axiosSecure =useAxiosSecure()
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [service, setService] = useState({});
@@ -21,7 +23,7 @@ const BookNow = () => {
     }, [id]);
 
     const fetchJobData = async () => {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/service/${id}`);
+        const { data } = await axiosSecure.get(`/service/${id}`);
         setService(data);
     };
 

@@ -1,14 +1,16 @@
-import axios from "axios"
+
 import toast from "react-hot-toast"
 // import useAuth from "../hooks/useAuth"
 import { useContext } from "react"
 import { AuthContext } from "../providers/AuthProvider"
 import DynamicTitle from "../components/DynamicTitle"
+import useAxiosSecure from "../hooks/useAxiosSecure"
 // import { useNavigate } from "react-router-dom"
 
 
 const AddService = () => {
     // const navigate = useNavigate()
+    const axiosSecure =useAxiosSecure()
     const { user } = useContext(AuthContext)
    
     const handleSubmit = async e => {
@@ -41,7 +43,7 @@ const AddService = () => {
       console.log(formData)
       try {
         // 1. make a post request
-        await axios.post(`${import.meta.env.VITE_API_URL}/add-services`, formData)
+        await axiosSecure.post(`/add-services`, formData)
         // 2. Reset form
         form.reset()
         // 3. Show toast and navigate
