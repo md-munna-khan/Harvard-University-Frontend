@@ -22,13 +22,13 @@ const AllServices = () => {
   return (
     <div className="container mx-auto my-12 px-4">
     {/* Search Bar */}
-    <div className="w-[400px] mx-auto mb-6">
+    <div className="w-[400px] mx-auto mb-6  ">
                
                 <input
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
                     name="search"
-                    placeholder="Search for movies..."
+                    placeholder="Search for services..."
                     className="input input-bordered w-full p-4 rounded-xl shadow-md transition-all hover:shadow-xl focus:outline-none"
                     required
                 />

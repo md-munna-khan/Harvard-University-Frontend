@@ -24,7 +24,10 @@ const {id} = useParams()
   }
     const { image, title, buyer,  area, service_price, description, serviceId} = services || {};
     return (
-      <div className="max-w-4xl mx-auto p-4 bg-white  items-center justify-center my-20  rounded-lg shadow-md overflow-hidden lg:flex">
+      <>
+         <h2 className=" my-4 text-3xl text-center lg:text-5xl">Service Details Page</h2>
+      <div className="max-w-4xl mx-auto p-4 bg-white  items-center justify-center my-10  rounded-lg shadow-md overflow-hidden lg:flex">
+     
       <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />
       <div className="lg:ml-4 lg:flex lg:flex-col lg:justify-between">
         <div className="px-6 py-4">
@@ -50,6 +53,7 @@ const {id} = useParams()
         </div>
       </div>
     </div>
+    </>
     );
 };
 

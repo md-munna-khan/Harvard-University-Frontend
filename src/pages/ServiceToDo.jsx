@@ -24,7 +24,7 @@ const ServiceToDo = () => {
 
     const fetchBookedServices = async () => {
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/bookings/${user?.email}`);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/bookings-requests/${user?.email}`);
            setBookings(data);
         } catch (error) {
             console.error("Error fetching booked services:", error);
@@ -60,6 +60,7 @@ const ServiceToDo = () => {
                                     <thead className="bg-gray-50">
                                         <tr>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Image</th>
+                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">email</th>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Date</th>
                                             <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">Service Name</th>
                                             <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">Price</th>

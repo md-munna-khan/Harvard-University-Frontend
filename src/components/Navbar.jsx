@@ -4,8 +4,15 @@ import { useContext } from 'react'
 import harvardLogo from '../assets/harvard.png'
 import { AuthContext } from '../providers/AuthProvider'
 import { Link } from 'react-router-dom'
+import { CiDark } from "react-icons/ci";
+import { MdOutlineLightMode } from "react-icons/md";
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext)
+  const { user, logOut,isDark,setIsDark } = useContext(AuthContext)
+
+
+  const handleDarkModeToggle=()=>{
+    setIsDark(!isDark)
+  }
   return (
     <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto'>
       <div className='flex-1'>
@@ -15,6 +22,12 @@ const Navbar = () => {
         </Link>
       </div>
       <div className='flex-none'>
+
+          {/* Dark Mode Toggle */}
+          <div onClick={handleDarkModeToggle} className="cursor-pointer text-2xl">
+              {isDark ? <MdOutlineLightMode /> : <CiDark />}
+            </div>
+
         <ul className='menu menu-horizontal px-1'>
           <li>
             <Link to='/'>Home</Link>
@@ -29,6 +42,8 @@ const Navbar = () => {
             </li>
           )}
         </ul>
+
+        
 
         {user && (
           <div className='dropdown dropdown-end z-50'>
