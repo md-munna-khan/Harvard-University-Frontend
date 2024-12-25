@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "aos/dist/aos.css"; // Import AOS styles
 import AOS from "aos";
 import logo from '../assets/harvard.png'
 import { FaFacebook, FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa"; // Import React Icons
+import { AuthContext } from "../providers/AuthProvider";
+
 
 const Footer = () => {
   React.useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
-
+const {isDark}=useContext(AuthContext)
   return (
-    <footer className="bg-blue-500 text-white py-10">
+    <footer className={`  ${isDark? 'bg-black text-whit':''}bg-blue-500 my-4 container mx-auto text-white py-10`}>
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo and Name */}
         <div className="flex flex-col items-start" data-aos="fade-down">

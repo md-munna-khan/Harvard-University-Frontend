@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const Subscription = () => {
+  const {isDark}=useContext(AuthContext)
   const plans = [
     {
       id: 1,
@@ -46,21 +49,21 @@ const Subscription = () => {
   ];
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 my-10 min-h-screen p-8">
+    <div className={` ${isDark?'bg-black text-white':''}bg-gray-100  dark:bg-gray-900 my-10 min-h-screen p-8`}>
       <header className="text-center mb-12">
-        <h1 className="text-4xl dark:text-gray-200 font-semibold text-gray-800">
+        <h1 className="text-4xl  font-semibold ">
           University Subscription Plans
         </h1>
-        <p className="text-lg dark:text-gray-300 text-gray-600 mt-2">
+        <p className="text-lg  mt-2">
           Elevate your academic journey with our subscription plans.
         </p>
       </header>
 
       <section className="text-center mb-16">
-        <h2 className="text-3xl dark:text-gray-200 font-semibold text-gray-800 mb-4">
+        <h2 className="text-3xl  font-semibold  mb-4">
           Choose Your Plan
         </h2>
-        <p className="text-lg dark:text-gray-300 text-gray-600">
+        <p className="text-lg  ">
           Select the plan that best suits your academic needs.
         </p>
       </section>

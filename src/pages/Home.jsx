@@ -11,13 +11,14 @@ import SubsCription from "../extraSection/SubsCription";
 const Home = () => {
     const {isDark}=useContext(AuthContext)
     return (
-        <div className={`${isDark? 'bg-black text-white':''}`}>
+        <div className={`${isDark? 'bg-black space-y-4 container  mx-auto text-white':''}`}>
             
             <DynamicTitle></DynamicTitle>
-           <Slider></Slider>
-           <PopularServices></PopularServices>
-         <VarsityPrograms></VarsityPrograms>
-         <SubsCription></SubsCription>
+        <Slider></Slider>
+          <PopularServices></PopularServices>
+       <VarsityPrograms></VarsityPrograms>
+        <SubsCription></SubsCription>
+       
         </div>
     );
 };
