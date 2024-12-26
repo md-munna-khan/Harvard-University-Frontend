@@ -3,6 +3,8 @@ import { format } from "date-fns";
 
 const BookTableRow = ({ book, handleStatusChange }) => {
     const {serviceImage, currentUserEmail,
+        providerName,
+        providerEmail,
         currentUserName, serviceName,comment,  area,serviceTakingDate,   price,  description, status, _id } = book || {};
 
     return (
@@ -11,10 +13,17 @@ const BookTableRow = ({ book, handleStatusChange }) => {
                 <img src={serviceImage} alt={ serviceName} className="w-10 h-10 object-cover" />
             </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
+{currentUserName}
+  </td>
+            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
 {currentUserEmail}
   </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
-{currentUserName}
+{providerEmail}
+  </td>
+            
+            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
+{providerName}
   </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">    
   {format(new Date(serviceTakingDate),'P')}
