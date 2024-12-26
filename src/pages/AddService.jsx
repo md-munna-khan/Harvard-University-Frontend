@@ -13,7 +13,7 @@ const AddService = () => {
   const axiosSecure = useAxiosSecure();
   const { user, isDark } = useContext(AuthContext);
 const personalEmails= user?.email
-
+console.log(personalEmails)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -40,9 +40,12 @@ const personalEmails= user?.email
     console.log(formData);
 
     try {
-      await axiosSecure.post(`/add-services?email=${personalEmails}`, formData);
-      form.reset();
-      toast.success('Data Added Successfully!!!');
+     const {data} = await axiosSecure.post(`/add-services?email=${personalEmails}`, formData);
+      console.log(data)
+      form.reset(); 
+      if(data?.acknowledged){
+        toast.success('Data Added Successfully!!!');
+      }
     
     } catch (err) {
       console.log(err);
