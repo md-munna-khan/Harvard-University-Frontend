@@ -39,7 +39,7 @@ const Slider = () => {
           <img src={slider1} alt="University 1" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2">
             <div className="text-left text-white">
-              <h2 className="text-2xl md:text-5xl font-bold">Harvard University</h2>
+              <h2 className="text-lg md:text-4xl font-bold">Harvard University</h2>
               <p className="mt-2 text-sm md:text-xl">Established in 1636, Harvard is the oldest institution of higher education in the United States. It is renowned for its rigorous academics and influential alumni.</p>
             </div>
           </div>
@@ -50,7 +50,7 @@ const Slider = () => {
           <img src={slider2} alt="University 2" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2">
             <div className="text-left text-white">
-              <h2 className="text-2xl md:text-5xl font-bold">Stanford University</h2>
+              <h2 className="text-lg md:text-4xl font-bold">Stanford University</h2>
               <p className="mt-2 text-sm md:text-xl">Founded in 1885, Stanford is known for its entrepreneurial spirit and close ties to Silicon Valley. It offers a wide range of undergraduate and graduate programs.</p>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Slider = () => {
           <img src={slider3} alt="University 3" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2">
             <div className="text-left text-white">
-              <h2 className="text-2xl md:text-5xl font-bold">Massachusetts Institute of Technology (MIT)</h2>
+              <h2 className="text-lg md:text-4xl font-bold">Massachusetts Institute of Technology (MIT)</h2>
               <p className="mt-2 text-sm md:text-xl">MIT, established in 1861, is a leader in science, engineering, and technology education. It has a strong focus on innovation and research.</p>
             </div>
           </div>

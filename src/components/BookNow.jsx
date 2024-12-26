@@ -1,6 +1,5 @@
 
 
-
 import DatePicker from "react-datepicker";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,8 +10,8 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const BookNow = () => {
-    const axiosSecure =useAxiosSecure()
-    const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    const { user, isDark } = useContext(AuthContext);
     const navigate = useNavigate();
     const [service, setService] = useState({});
     const [startDate, setStartDate] = useState(new Date());
@@ -74,128 +73,130 @@ const BookNow = () => {
     };
 
     return (
-        <div className="p-6 w-full bg-white rounded-md shadow-md md:min-h-[350px]">
-            <h2 className="text-lg font-semibold text-gray-700 capitalize">Place A Booking</h2>
+        <div className={`p-6 w-full rounded-md shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
+            <h2 className={`font-semibold text-center text-2xl lg:text-4xl capitalize ${isDark ? 'text-white' : 'text-gray-700'}`}>
+                Place A Booking
+            </h2>
             <form onSubmit={handleBidSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 <div className="md:col-span-1">
-                    <label className="text-gray-700" htmlFor="serviceImage">Service Image</label>
+                    <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceImage">Service Image</label>
                     <img src={image} alt={title} className="block w-full h-auto mt-2 rounded-md" />
                 </div>
-                <div className="md:col-span-1">
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <div>
-                            <label className="text-gray-700" htmlFor="serviceId">Service ID</label>
+                <div className="">
+                    <div className="col-span-1 md:col-span-2">
+                        <div className="">
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceId">Service ID</label>
                             <input
                                 id="serviceId"
                                 type="text"
                                 name="serviceId"
                                 value={id}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
-                        <div>
-                            <label className="text-gray-700" htmlFor="serviceName">Service Name</label>
+                        <div className="">
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceName">Service Name</label>
                             <input
                                 id="serviceName"
                                 type="text"
                                 name="serviceName"
                                 value={title}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="providerEmail">Provider Email</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerEmail">Provider Email</label>
                             <input
                                 id="providerEmail"
                                 type="text"
                                 name="providerEmail"
                                 value={providerEmail}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="providerName">Provider Name</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerName">Provider Name</label>
                             <input
                                 id="providerName"
                                 type="text"
                                 name="providerName"
                                 value={providerName}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="currentUserEmail">Current User Email</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserEmail">Current User Email</label>
                             <input
                                 id="currentUserEmail"
                                 type="text"
                                 name="currentUserEmail"
                                 value={user?.email}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="currentUserName">Current User Name</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserName">Current User Name</label>
                             <input
                                 id="currentUserName"
                                 type="text"
                                 name="currentUserName"
                                 value={user?.displayName}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700" htmlFor="servicePrice">Service Price</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="servicePrice">Service Price</label>
                             <input
                                 id="servicePrice"
                                 type="text"
                                 name="servicePrice"
                                 value={service_price}
                                 readOnly
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             />
                         </div>
 
                         <div>
-                            <label className="text-gray-700"  htmlFor="serviceTakingDate">Service Taking Date</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceTakingDate">Service Taking Date</label>
                             <DatePicker
                                 selected={startDate}
                                 onChange={(date) => setStartDate(date)}
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                                 dateFormat="MMMM d, yyyy"
                                 minDate={new Date()}
                             />
                         </div>
 
                         <div className="col-span-2">
-                            <label className="text-gray-700" required htmlFor="comment">Special Instruction</label>
+                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="comment">Special Instruction</label>
                             <textarea
                                 id="comment"
                                 name="comment"
                                 rows="4"
                                 required
-                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
                             ></textarea>
                         </div>
                     </div>
 
-                    <div className="flex justify-end mt-6">
+                    <div className="flex items-center justify-center mt-6 md:col-span-2">
                         <button
                             type="submit"
-                            className="px-6 py-2 leading-5 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                            className={`px-6 py-3 text-sm font-medium leading-5 text-center text-white capitalize transition-colors duration-300 transform ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-700 hover:bg-gray-800'} rounded-lg focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50`}
                         >
-                            Purchase
+                            Place Booking
                         </button>
                     </div>
                 </div>
@@ -205,3 +206,4 @@ const BookNow = () => {
 };
 
 export default BookNow;
+

@@ -149,14 +149,14 @@ const MyBookedServices = () => {
                                 <table className={`min-w-full divide-y ${isDark ? 'divide-gray-700' : 'divide-gray-200'}`}>
                                     <thead className={isDark ? 'bg-gray-800' : 'bg-gray-50'}>
                                         <tr>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Image</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Email</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Date</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Service Name</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Price</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Service Area</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Description</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Actions</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Image</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Email</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Date</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Service Name</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Price</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Service Area</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Description</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody className={isDark ? 'bg-gray-900' : 'bg-white'}>

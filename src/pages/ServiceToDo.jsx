@@ -64,19 +64,19 @@ const ServiceToDo = () => {
             ) : (
                 <div className="flex flex-col mt-6">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div className="inline-block  text-2xl min-w-full py-2 align-middle md:px-6 lg:px-8">
                             <div className={`overflow-hidden border ${isDark ? 'border-gray-700' : 'border-gray-200'} md:rounded-lg`}>
                                 <table className={`min-w-full divide-y ${isDark ? 'divide-gray-700' : 'divide-gray-200'}`}>
-                                    <thead className={isDark ? 'bg-gray-800' : 'bg-gray-50'}>
-                                        <tr>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Image</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Email</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Date</th>
-                                            <th className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right">Service Name</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Price</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Service Area</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Description</th>
-                                            <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right">Actions</th>
+                                    <thead className={   isDark ? 'bg-gray-800 ' : 'bg-gray-50'}>
+                                        <tr className="">
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Image</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Email</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Date</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Service Name</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Price</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Service Area</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Description</th>
+                                            <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody className={isDark ? 'bg-gray-900 divide-gray-700' : 'bg-white divide-gray-200'}>
