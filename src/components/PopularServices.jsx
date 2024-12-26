@@ -34,7 +34,7 @@ const PopularServices = () => {
   }
 
   return (
-    <div className={`p-6 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className={`p-6 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       <div>
         <h1 className="text-3xl md:text-5xl font-bold text-center" data-aos="fade-up">
           Popular Services

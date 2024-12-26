@@ -128,7 +128,7 @@ const MyBookedServices = () => {
     }
 
     return (
-        <section className={`container px-4 rounded-lg mx-auto my-10 pt-12 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+        <section className={`container px-4 rounded-lg mx-auto my-10 pt-12 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
             <DynamicTitle />
             <div className="flex items-center gap-x-3">
                 <h2 className={`text-lg font-medium ${isDark ? 'text-white' : 'text-gray-800'}`}>My Booked Services</h2>

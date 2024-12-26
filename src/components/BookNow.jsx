@@ -90,7 +90,7 @@ const BookNow = () => {
     }
 
     return (
-        <div className={`p-6 w-full rounded-md shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
+        <div className={`p-6 w-full rounded-md my-10 shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
             <h2 className={`font-semibold text-center text-2xl lg:text-4xl capitalize ${isDark ? 'text-white' : 'text-gray-700'}`}>
                 Place A Booking
             </h2>

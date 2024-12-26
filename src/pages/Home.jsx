@@ -13,7 +13,7 @@ const Home = () => {
     const {isDark}=useContext(AuthContext)
     
     return (
-        <div className={`${isDark? 'bg-black space-y-4 container  mx-auto text-white':''}`}>
+        <div className={`${isDark? 'bg-gray-800 space-y-4 container  mx-auto text-white':''}`}>
             
             <DynamicTitle></DynamicTitle>
         <Slider></Slider>

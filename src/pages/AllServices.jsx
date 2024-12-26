@@ -30,7 +30,7 @@ if(loading){
   return <Loading></Loading>
 }
   return (
-    <div className={`container mx-auto my-12 px-4 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className={`container mx-auto my-12 px-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       {/* Search Bar */}
       <DynamicTitle></DynamicTitle>
       <div className="w-full my-4 py-2 sm:w-[400px] mx-auto mb-6">
@@ -39,7 +39,7 @@ if(loading){
           type="text"
           name="search"
           placeholder="Search for services..."
-          className={`input input-bordered w-full p-4 rounded-xl shadow-md transition-all hover:shadow-xl focus:outline-none ${isDark ? 'bg-black text-white border-white py-2' : 'bg-white text-black'}`}
+          className={`input input-bordered w-full p-4 rounded-xl shadow-md transition-all hover:shadow-xl focus:outline-none ${isDark ? 'bg-gray-800 text-white border-white py-2' : 'bg-white text-black'}`}
           required
         />
       </div>
@@ -49,7 +49,7 @@ if(loading){
         {services.map((service) => (
           <div
             key={service.id}
-            className={`p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}
+            className={`p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
           >
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
               {/* Service Image */}
@@ -86,8 +86,8 @@ if(loading){
                 </div>
 
                 <div className="mt-4">
-                  <p className={`text-gray-700 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Area: {service.area}</p>
-                  <p className={`text-gray-700 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Price: ${service.service_price.toFixed(2)}</p>
+                  <p className={` ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Area: {service.area}</p>
+                  <p className={` ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Price: ${service.service_price.toFixed(2)}</p>
                 </div>
 
                 <Link to={`/service-details/${service._id}`}>

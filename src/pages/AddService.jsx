@@ -56,14 +56,14 @@ console.log(personalEmails)
   
 
   return (
-    <div className={`flex justify-center py-4 items-center min-h-[calc(100vh-306px)] my-12 ${isDark ? 'bg-black rounded-lg text-white' : ''}`}>
+    <div className={`flex justify-center py-4 items-center min-h-[calc(100vh-306px)] my-12 ${isDark ? 'bg-gray-800 rounded-lg text-white' : ''}`}>
       <DynamicTitle />
       <section className='p-2 md:p-6 mx-auto bg-white dark:bg-gray-800 rounded-md shadow-md'>
         <h2 className='text-lg font-semibold text-gray-700 dark:text-white capitalize'>
           Post a Service
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className='grid grid-cols-1 gap-6 mt-4 md:grid-cols-2'>
+          <div className='grid grid-cols-2 gap-6 mt-4 md:grid-cols-3'>
             <div>
               <label className='text-gray-700 dark:text-gray-300' htmlFor='service_image'>
                 Image URL of the Service

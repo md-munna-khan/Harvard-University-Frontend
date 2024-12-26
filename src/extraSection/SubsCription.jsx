@@ -49,7 +49,7 @@ const Subscription = () => {
   ];
 
   return (
-    <div className={` ${isDark?'bg-black text-white':''}bg-gray-100  dark:bg-gray-900 my-10 min-h-screen p-8`}>
+    <div className={` ${isDark?'bg-gray-800 text-white':''}bg-gray-100  dark:bg-gray-900 my-10 min-h-screen p-8`}>
       <header className="text-center mb-12">
         <h1 className="text-4xl  font-semibold ">
           University Subscription Plans
