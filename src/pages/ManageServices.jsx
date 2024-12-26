@@ -8,12 +8,13 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import DynamicTitle from "../components/DynamicTitle";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "../components/Loading";
 
 const ManageServices = () => {
   const axiosSecure = useAxiosSecure();
   const { user, isDark } = useContext(AuthContext);
   const [services, setServices] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchAllServices();
   }, [user]);
@@ -22,11 +23,15 @@ const ManageServices = () => {
     try {
       const { data } = await axiosSecure.get(`/services/${user?.email}`);
       setServices(data);
+      setLoading(false)
     } catch (error) {
       console.error("Error fetching services:", error);
     }
   };
-
+  if(loading){
+ 
+    return <Loading></Loading>
+  }
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",

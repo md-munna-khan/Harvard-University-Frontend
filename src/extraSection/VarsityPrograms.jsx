@@ -1,8 +1,6 @@
 
 
-
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -57,6 +55,10 @@ const VarsityPrograms = () => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  useEffect(() => {
+    AOS.refresh();
+  });
+
   return (
     <div className="dark:bg-gradient-to-r  dark:from-yellow-900 my-10 dark:via-blue-900 dark:to-gray-500 py-16 px-4 sm:px-8 lg:px-16 bg-gradient-to-r from-gray-200 via-transparent/30 to-gray-300">
       <div className="max-w-7xl mx-auto text-center">
@@ -67,15 +69,13 @@ const VarsityPrograms = () => {
           Discover our comprehensive range of graduation programs designed to equip you with the skills and knowledge for a successful career.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {programs.map((program, index) => (
-            <motion.div
+            <div
               key={index}
               className="bg-white rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl dark:bg-gray-800"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2, delay: index * 0.2 }}
               data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
               <div className="relative aspect-w-16 aspect-h-9">
                 <img
@@ -93,7 +93,7 @@ const VarsityPrograms = () => {
                   Graduation Year: {program.year}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -102,4 +102,5 @@ const VarsityPrograms = () => {
 };
 
 export default VarsityPrograms;
+
 

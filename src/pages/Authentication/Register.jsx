@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
-
+import Lottie from 'lottie-react'
+import regAnimation from '../../assets/register.json'
 const Registration = () => {
   const navigate = useNavigate()
   const { signInWithGoogle, createUser, updateUserProfile, setUser } =
@@ -187,11 +188,10 @@ const Registration = () => {
           </div>
         </div>
         <div
-          className='hidden bg-cover bg-center lg:block lg:w-1/2'
-        //   style={{
-        //     backgroundImage: `url(${bgImg})`,
-        //   }}
-        ></div>
+          className='hidden bg-cover bg-center lg:block lg:w-1/2'>
+
+            <Lottie animationData={regAnimation}></Lottie>
+          </div>
       </div>
     </div>
   )

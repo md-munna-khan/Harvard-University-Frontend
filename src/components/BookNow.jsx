@@ -1,5 +1,3 @@
-
-
 import DatePicker from "react-datepicker";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,15 +13,23 @@ const BookNow = () => {
     const navigate = useNavigate();
     const [service, setService] = useState({});
     const [startDate, setStartDate] = useState(new Date());
+    const [loading, setLoading] = useState(true); // Loading state
     const { id } = useParams();
 
+    // Fetch service data on component mount or when `id` changes
     useEffect(() => {
         fetchJobData();
     }, [id]);
 
     const fetchJobData = async () => {
-        const { data } = await axiosSecure.get(`/service/${id}`);
-        setService(data);
+        try {
+            const { data } = await axiosSecure.get(`/service/${id}`);
+            setService(data);
+            setLoading(false); // Stop loading once data is fetched
+        } catch (error) {
+            setLoading(false);
+            toast.error("Error fetching service data.");
+        }
     };
 
     const {
@@ -36,10 +42,17 @@ const BookNow = () => {
         description,
     } = service || {};
 
+    // Handle form submission
     const handleBidSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const comment = form.comment.value;
+
+        // Validate if the user is the provider
+        if (providerEmail === user?.email) {
+            return toast.error("You cannot book your own service.");
+        }
+
         const bookData = {
             price: service_price,
             comment,
@@ -56,21 +69,25 @@ const BookNow = () => {
             status: "pending",
         };
 
-        // 1. Check bid permission validation
-        if (providerEmail === user?.email) {
-            return toast.error("Action not permitted");
-        }
-
         try {
+            // Place the booking request
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-book`, bookData);
             form.reset();
-            toast.success("Booking placed successfully");
+            toast.success("Booking placed successfully!");
             navigate('/booked-services');
         } catch (err) {
-            console.log(err);
-            toast.error(err?.response?.data);
+            toast.error(err?.response?.data || "Something went wrong while placing the booking.");
         }
     };
+
+    // Loading state: render a spinner while fetching service data
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-full">
+                <div className="spinner"></div> {/* Add a spinner component or a loading animation */}
+            </div>
+        );
+    }
 
     return (
         <div className={`p-6 w-full rounded-md shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
@@ -82,119 +99,117 @@ const BookNow = () => {
                     <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceImage">Service Image</label>
                     <img src={image} alt={title} className="block w-full h-auto mt-2 rounded-md" />
                 </div>
-                <div className="">
-                    <div className="col-span-1 md:col-span-2">
-                        <div className="">
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceId">Service ID</label>
-                            <input
-                                id="serviceId"
-                                type="text"
-                                name="serviceId"
-                                value={id}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                <div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceId">Service ID</label>
+                        <input
+                            id="serviceId"
+                            type="text"
+                            name="serviceId"
+                            value={id}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div className="">
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceName">Service Name</label>
-                            <input
-                                id="serviceName"
-                                type="text"
-                                name="serviceName"
-                                value={title}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceName">Service Name</label>
+                        <input
+                            id="serviceName"
+                            type="text"
+                            name="serviceName"
+                            value={title}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerEmail">Provider Email</label>
-                            <input
-                                id="providerEmail"
-                                type="text"
-                                name="providerEmail"
-                                value={providerEmail}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerEmail">Provider Email</label>
+                        <input
+                            id="providerEmail"
+                            type="text"
+                            name="providerEmail"
+                            value={providerEmail}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerName">Provider Name</label>
-                            <input
-                                id="providerName"
-                                type="text"
-                                name="providerName"
-                                value={providerName}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerName">Provider Name</label>
+                        <input
+                            id="providerName"
+                            type="text"
+                            name="providerName"
+                            value={providerName}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserEmail">Current User Email</label>
-                            <input
-                                id="currentUserEmail"
-                                type="text"
-                                name="currentUserEmail"
-                                value={user?.email}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserEmail">Current User Email</label>
+                        <input
+                            id="currentUserEmail"
+                            type="text"
+                            name="currentUserEmail"
+                            value={user?.email}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserName">Current User Name</label>
-                            <input
-                                id="currentUserName"
-                                type="text"
-                                name="currentUserName"
-                                value={user?.displayName}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserName">Current User Name</label>
+                        <input
+                            id="currentUserName"
+                            type="text"
+                            name="currentUserName"
+                            value={user?.displayName}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="servicePrice">Service Price</label>
-                            <input
-                                id="servicePrice"
-                                type="text"
-                                name="servicePrice"
-                                value={service_price}
-                                readOnly
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="servicePrice">Service Price</label>
+                        <input
+                            id="servicePrice"
+                            type="text"
+                            name="servicePrice"
+                            value={service_price}
+                            readOnly
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        />
+                    </div>
 
-                        <div>
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceTakingDate">Service Taking Date</label>
-                            <DatePicker
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                                dateFormat="MMMM d, yyyy"
-                                minDate={new Date()}
-                            />
-                        </div>
+                    <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceTakingDate">Service Taking Date</label>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                            dateFormat="MMMM d, yyyy"
+                            minDate={new Date()}
+                        />
+                    </div>
 
-                        <div className="col-span-2">
-                            <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="comment">Special Instruction</label>
-                            <textarea
-                                id="comment"
-                                name="comment"
-                                rows="4"
-                                required
-                                className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-gray-200'} rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring`}
-                            ></textarea>
-                        </div>
+                    <div className="col-span-2">
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="comment">Special Instruction</label>
+                        <textarea
+                            id="comment"
+                            name="comment"
+                            rows="4"
+                            required
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                        ></textarea>
                     </div>
 
                     <div className="flex items-center justify-center mt-6 md:col-span-2">
                         <button
                             type="submit"
-                            className={`px-6 py-3 text-sm font-medium leading-5 text-center text-white capitalize transition-colors duration-300 transform ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-700 hover:bg-gray-800'} rounded-lg focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50`}
+                            className={`px-6 py-3 text-sm font-medium leading-5 text-center text-white capitalize transition-colors duration-300 transform ${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-700 hover:bg-gray-800'} rounded-lg focus:outline-none border-black focus:ring-opacity-50`}
                         >
                             Place Booking
                         </button>
@@ -206,4 +221,3 @@ const BookNow = () => {
 };
 
 export default BookNow;
-

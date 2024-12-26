@@ -3,16 +3,16 @@
 
 
 import toast from "react-hot-toast";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import DynamicTitle from "../components/DynamicTitle";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import Loading from "../components/Loading";
+
 
 const AddService = () => {
   const axiosSecure = useAxiosSecure();
   const { user, isDark } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+const personalEmails= user?.email
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,18 +40,17 @@ const AddService = () => {
     console.log(formData);
 
     try {
-      await axiosSecure.post(`/add-services`, formData);
+      await axiosSecure.post(`/add-services?email=${personalEmails}`, formData);
       form.reset();
       toast.success('Data Added Successfully!!!');
+    
     } catch (err) {
       console.log(err);
       toast.error(err.message);
     }
   };
 
-  if (loading) {
-    return <div><Loading /></div>;
-  }
+  
 
   return (
     <div className={`flex justify-center py-4 items-center min-h-[calc(100vh-306px)] my-12 ${isDark ? 'bg-black rounded-lg text-white' : ''}`}>
@@ -136,7 +135,7 @@ const AddService = () => {
           </div>
           <div className='flex justify-end mt-6'>
             <button className='disabled:cursor-not-allowed w-full px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'>
-              Save
+              Add
             </button>
           </div>
         </form>

@@ -12,14 +12,14 @@ const Footer = () => {
   }, []);
 const {isDark}=useContext(AuthContext)
   return (
-    <footer className={`  ${isDark? 'bg-black text-whit':''}bg-blue-500 my-4 container mx-auto text-white py-10`}>
+    <footer className={`  ${isDark? 'bg-black text-whit':''} rounded-lg specialGradient my-4 container mx-auto text-white py-10`}>
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo and Name */}
         <div className="flex flex-col items-start" data-aos="fade-down">
           <img
             src={logo} // Replace with your logo
             alt="Logo"
-            className="w-8 h-8 rounded-full"
+            className="w-10 h-10 rounded-full"
           />
           <h2 className="text-xl font-bold">Abroad University</h2>
           <p className="text-sm mt-2">

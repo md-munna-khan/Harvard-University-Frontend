@@ -25,20 +25,20 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`navbar bg-base-100 shadow-sm container px-4 mx-auto${isDark ? ' bg-black text-white' : ''}`}>
+    <div className={`navbar bg-base-100 shadow-sm container rounded-lg px-4 mx-auto${isDark ? ' bg-black text-white' : ''}`}>
       <div className='flex-1 flex items-center'>
         <Link to='/' className='flex gap-2 items-center'>
           <img className='w-auto h-7' src={harvardLogo} alt='Harvard Logo' />
-          <span className='font-bold text-lg lg:text-2xl'>ABROAD UNIVERSITY</span>
+          <span className='font-bold lg:text-2xl'>ABROAD <i className='bg-gradient-to-r from-red-500 to-red-700 text-transparent bg-clip-text '>UNIVERSITY</i></span>
         </Link>
       </div>
       <div className='flex-none flex items-center gap-4'>
         {/* Dark Mode Toggle */}
-        <div onClick={handleDarkModeToggle} className="cursor-pointer text-3xl font-bold">
+        <div onClick={handleDarkModeToggle} className="cursor-pointer text-2xl  lg:text-4xl font-bold">
           {isDark ? <MdOutlineLightMode /> : <CiDark />}
         </div>
 
-        <ul className={`hidden top-[100px] md:flex menu menu-horizontal px-1 ${isDark ? '' : 'text-white bg-blue-500 rounded-lg'}`}>
+        <ul className={`hidden top-[100px] md:flex menu menu-horizontal px-1 ${isDark ? '' : 'text-white  specialGradient rounded-lg'}`}>
           <li className='rounded'>
             <NavLink to='/'>Home</NavLink>
           </li>
@@ -53,11 +53,11 @@ const Navbar = () => {
         </ul>
 
         <div className='relative'>
-          <button onClick={handleMobileMenu} className='text-2xl lg:text-4xl md:hidden lg:block'>
+          <button onClick={handleMobileMenu} className='text-3xl lg:text-4xl sm:hidden md:block'>
             {mobileMenuShow ? <IoMdClose /> : <MdOutlineMenuOpen />}
           </button>
           {mobileMenuShow && (
-            <ul className={`menu absolute menu-vertical px-1 z-10 right-0 top-12 bg-base-100 w-52 shadow-lg rounded ${isDark ? 'bg-black text-white' : ''}`}>
+            <ul className={`menu absolute menu-vertical px-1 z-10 right-0 top-12 bg-base-100 text-white specialGradient w-52 shadow-lg rounded ${isDark ? 'bg-black text-white' : ''}`}>
               <li className='rounded lg:hidden '>
                 <Link to='/'>Home</Link>
               </li>

@@ -3,11 +3,14 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import DynamicTitle from "../components/DynamicTitle";
+import Loading from "../components/Loading";
 
 const AllServices = () => {
   const { isDark } = useContext(AuthContext);
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAllServices();
@@ -17,14 +20,19 @@ const AllServices = () => {
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/services?search=${search}`);
       setServices(data);
+      setLoading(false)
     } catch (error) {
       console.error("Error fetching services:", error);
     }
   };
-
+if(loading){
+ 
+  return <Loading></Loading>
+}
   return (
     <div className={`container mx-auto my-12 px-4 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
       {/* Search Bar */}
+      <DynamicTitle></DynamicTitle>
       <div className="w-full my-4 py-2 sm:w-[400px] mx-auto mb-6">
         <input
           onChange={(e) => setSearch(e.target.value)}
@@ -83,7 +91,7 @@ const AllServices = () => {
                 </div>
 
                 <Link to={`/service-details/${service._id}`}>
-                  <p className="mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-center">
+                  <p className="mt-4 p-2  specialGradient text-white rounded-md hover:bg-blue-600 text-center">
                     View Detail
                   </p>
                 </Link>

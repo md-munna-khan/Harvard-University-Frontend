@@ -7,6 +7,8 @@ import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
 import DynamicTitle from '../../components/DynamicTitle'
+import Lottie from 'lottie-react'
+import logAnimation from '../../assets/login.json'
 const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -50,11 +52,9 @@ const Login = () => {
       <DynamicTitle></DynamicTitle>
       <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
         <div
-          className='hidden bg-cover bg-center lg:block lg:w-1/2'
-        //   style={{
-        //     backgroundImage: `url(${bgImg})`,
-        //   }}
-        ></div>
+          className='hidden bg-cover bg-center lg:block lg:w-1/2'>
+       <Lottie animationData={logAnimation}></Lottie>
+        </div>
 
         <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
           <div className='flex justify-center mx-auto'>

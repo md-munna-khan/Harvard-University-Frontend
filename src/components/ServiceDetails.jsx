@@ -37,7 +37,7 @@ const {id} = useParams()
             <span className="text-gray-900 font-bold">price:${service_price}</span>
           </div>
           <Link to={`/book-now/${id}`}>
-            <button className="bg-blue-500 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className=" specialGradient mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Book Now
             </button>
           </Link>

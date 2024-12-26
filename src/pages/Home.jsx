@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext} from "react";
 
 import DynamicTitle from "../components/DynamicTitle";
 import PopularServices from "../components/PopularServices";
@@ -8,8 +8,10 @@ import VarsityPrograms from "../extraSection/VarsityPrograms";
 import SubsCription from "../extraSection/SubsCription";
 
 
+
 const Home = () => {
     const {isDark}=useContext(AuthContext)
+    
     return (
         <div className={`${isDark? 'bg-black space-y-4 container  mx-auto text-white':''}`}>
             

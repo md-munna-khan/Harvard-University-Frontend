@@ -16,15 +16,15 @@ const DynamicTitle = () => {
         } else if (path === '/register') {
             title = "Register / Abroad University";
         } else if (path === '/all-services') {
-            title = 'All-Services';
+            title = 'All-Services/Abroad University';
         } else if (path === '/manage-services') {
-            title = "Manage-Services ";
+            title = "Manage-Services/Abroad University ";
         } else if (path === '/booked-services') {
-            title = "Booked-Services ";
+            title = "Booked-Services/Abroad University ";
         }else if(path=== '/service-to-do'){
-            title= 'service-To-Do'
+            title= 'service-To-Do/Abroad University'
         }else if(path=== '/add-service')[
-            title='Add Services'
+            title='Add Services/Abroad University'
         ]
        
         

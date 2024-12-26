@@ -48,7 +48,7 @@ const ServiceCard = ({ service }) => {
         </div>
         <div className="text-center mt-4">
           <Link to={`/service-details/${_id}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white w-full font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+            <button className=" specialGradient hover:bg-blue-700 text-white w-full font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
               View Detail
             </button>
           </Link>

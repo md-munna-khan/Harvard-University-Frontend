@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 const ServiceRoDoTable= ({ book, handleStatusChange }) => {
-    const {serviceImage,comment,  currentUserEmail, serviceName,  area, serviceTakingDate,   price,  description, status, _id } = book || {};
+    const {serviceImage,comment,  currentUserName,  currentUserEmail, serviceName,  area, serviceTakingDate,   price,  description, status, _id } = book || {};
 
     return (
         <tr>
@@ -10,6 +10,9 @@ const ServiceRoDoTable= ({ book, handleStatusChange }) => {
             </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
             {currentUserEmail}
+            </td>
+            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+            {currentUserName}
             </td>
             <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
              {format(new Date(serviceTakingDate),'P')}
@@ -38,7 +41,7 @@ const ServiceRoDoTable= ({ book, handleStatusChange }) => {
                 <span
                     className={`h-1.5 w-1.5 rounded-full ${
                         status === 'pending' && 'bg-yellow-500'
-                    } ${status === 'working' && 'bg-blue-500'} ${
+                    } ${status === 'working' && ' specialGradient'} ${
                         status === 'completed' && 'bg-green-500'
                     } ${status === 'Rejected' && 'bg-red-500'} `}
                 ></span>
@@ -66,3 +69,4 @@ const ServiceRoDoTable= ({ book, handleStatusChange }) => {
 
 
 export default ServiceRoDoTable;
+

@@ -1,3 +1,7 @@
+
+
+
+
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from 'react'
 import {
@@ -78,7 +82,7 @@ if(currentUser?.email){
 }else{
   setUser(currentUser)
 
-  const {data}= await axios.get(`${import.meta.env.VITE_API_URL}/clear-cookie`,
+   await axios.post(`${import.meta.env.VITE_API_URL}/clear-cookie`,
      {withCredentials:true}
 )
 

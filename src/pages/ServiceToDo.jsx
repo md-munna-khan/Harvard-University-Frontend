@@ -71,6 +71,7 @@ const ServiceToDo = () => {
                                         <tr className="">
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Image</th>
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Email</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Name</th>
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Date</th>
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Service Name</th>
                                             <th className="px-4 py-3.5 text-md font-normal text-left rtl:text-right">Price</th>
