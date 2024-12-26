@@ -81,7 +81,7 @@ const Navbar = () => {
             {mobileMenuShow ? <IoMdClose /> : <MdOutlineMenuOpen />}
           </button>
           {mobileMenuShow && (
-            <ul ref={dropdownRef} className={`menu absolute menu-vertical  z-10 right-0 top-12 bg-base-100 text-white ${user ? 'specialGradient' : 'specialGradient'} shadow-lg lg:w-none w-52 rounded ${isDark ? 'bg-gray-800 text-white' : ''}`}>
+            <ul ref={dropdownRef} className={`menu absolute menu-vertical  z-10 right-0 top-12 bg-base-100 text-white ${user ? 'specialGradient lg:w-52 ' : 'specialGradient lg:hidden'} shadow-lg   w-52  rounded ${isDark ? 'bg-gray-800 text-white' : ''}`}>
               <li className='rounded lg:hidden'>
                 <Link to='/'>Home</Link>
               </li>
