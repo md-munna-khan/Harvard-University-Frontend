@@ -63,7 +63,7 @@ console.log(personalEmails)
           Post a Service
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className='grid grid-cols-2 gap-6 mt-4 md:grid-cols-3'>
+          <div className='grid grid-cols-1 gap-6 mt-4 md:grid-cols-2'>
             <div>
               <label className='text-gray-700 dark:text-gray-300' htmlFor='service_image'>
                 Image URL of the Service

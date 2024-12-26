@@ -41,8 +41,8 @@ const ServiceDetails = () => {
         <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />
         <div className="lg:ml-4 lg:flex lg:flex-col lg:justify-between">
           <div className="px-6 py-4">
-            <div className="font-bold text-2xl mb-2">{title}</div>
-            <p className="text-base mb-4">{description}</p>
+            <div className="font-bold text-2xl mb-2">Tittle:{title}</div>
+            <p className="text-base mb-4"><span className="font-bold">Description:</span>{description}</p>
             <div>
               <span className="font-bold">price: ${service_price}</span>
             </div>

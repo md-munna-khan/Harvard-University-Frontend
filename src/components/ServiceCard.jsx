@@ -21,12 +21,12 @@ const ServiceCard = ({ service }) => {
         />
       </div>
       <div className="lg:col-span-2 md:col-span-1 col-span-1 flex flex-col justify-center">
-        <div className={`font-bold text-2xl mb-2 ${isDark ? 'text-blue-400' : 'text-blue-700'}`}>
+        <div className={`font-bold  mb-2 ${isDark ? 'text-blue-400' : 'text-blue-700'}`}>
           Title: {title}
         </div>
         <div>
           <p className={`text-base ${isDark ? 'text-white' : 'text-gray-700'}`}>
-            Description: {description?.substring(0, 100)}...
+           <span className="font-bold"> Description:</span> {description?.substring(0, 100)}...
           </p>
         </div>
         <div>
