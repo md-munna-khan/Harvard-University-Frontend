@@ -36,7 +36,7 @@ const Slider = () => {
        
        <SwiperSlide>
         <div className="relative">
-          <img src={slider1} alt="University 1" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
+          <img src={slider1} alt="University 1" className="w-full h-64 md:h-96 lg:h-[600px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 p-2">
             <div className="text-left text-white">
               <h2 className="text-lg md:text-4xl font-bold">Harvard University</h2>
@@ -47,7 +47,7 @@ const Slider = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative">
-          <img src={slider2} alt="University 2" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
+          <img src={slider2} alt="University 2" className="w-full h-64 md:h-96 lg:h-[600px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 p-2">
             <div className="text-left text-white">
               <h2 className="text-lg md:text-4xl font-bold">Stanford University</h2>
@@ -58,7 +58,7 @@ const Slider = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative">
-          <img src={slider3} alt="University 3" className="w-full h-64 md:h-96 lg:h-[800px] object-cover" style={{ objectFit: 'cover' }} />
+          <img src={slider3} alt="University 3" className="w-full h-64 md:h-96 lg:h-[600px] object-cover" style={{ objectFit: 'cover' }} />
           <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 p-2">
             <div className="text-left text-white">
               <h2 className="text-lg md:text-4xl font-bold">Massachusetts Institute of Technology (MIT)</h2>

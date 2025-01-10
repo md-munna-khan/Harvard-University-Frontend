@@ -1,8 +1,4 @@
 
-
-
-
-
 import { useContext, useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { CiDark } from "react-icons/ci";
@@ -49,7 +45,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div ref={navbarRef} className={`navbar bg-base-100 shadow-sm items-center container rounded-lg px-4 mx-auto${isDark ? ' bg-gray-800 text-white' : ''}`}>
+    <div ref={navbarRef} className={`navbar   shadow-sm fixed top-0 z-50 backdrop-blur-sm  items-center container rounded-lg px-4 mx-auto ${isDark ? ' bg-gray-800 text-white' : ''}`}>
       <div className='flex-1 flex items-center'>
         <Link to='/' className='flex gap-2 items-center'>
           <img className='w-auto h-7' src={harvardLogo} alt='Harvard Logo' />
@@ -77,11 +73,12 @@ const Navbar = () => {
         </ul>
 
         <div className='relative'>
-          <button onClick={handleMobileMenu} className='text-4xl lg:text-5xl sm:hidden md:block'>
-            {mobileMenuShow ? <IoMdClose /> : <MdOutlineMenuOpen />}
+       
+          <button onClick={handleMobileMenu} className='text-3xl lg:text-4xl sm:hidden md:block'>
+            {mobileMenuShow  ?  <IoMdClose />  : <MdOutlineMenuOpen />}
           </button>
           {mobileMenuShow && (
-            <ul ref={dropdownRef} className={`menu absolute menu-vertical  z-10 right-0 top-12 bg-base-100 text-white ${user ? 'specialGradient lg:w-52 ' : 'specialGradient lg:hidden'} shadow-lg   w-52  rounded ${isDark ? 'bg-gray-800 text-white' : ''}`}>
+            <ul ref={dropdownRef} className={`menu absolute menu-vertical  z-10 right-0 top-12  bg-base-100 text-white ${user ? 'specialGradient lg:w-52 ' : 'specialGradient lg:hidden'} shadow-lg   w-52  rounded ${isDark ? 'bg-gray-800 text-white' : ''}`}>
               <li className='rounded lg:hidden'>
                 <Link to='/'>Home</Link>
               </li>
@@ -134,6 +131,9 @@ const Navbar = () => {
                   alt='User Profile Photo'
                   src={user?.photoURL}
                 />
+                 {/* <li>
+                  <span className='block text-center py-1'>Name: {user.displayName}</span>
+                </li> */}
               </div>
             </div>
             {dropDownShow && (
@@ -145,15 +145,7 @@ const Navbar = () => {
                 <li>
                   <span className='block text-center py-1'>Name: {user.displayName}</span>
                 </li>
-                {/* Uncomment the following block if email display and logout button are needed */}
-                {/* <li>
-                  <span className='block text-center py-1'>Email: {user.email}</span>
-                </li>
-                <li className='mt-2'>
-                  <button onClick={logOut} className='block text-center w-full py-1 rounded-md'>
-                    Logout
-                  </button>
-                </li> */}
+             
               </ul>
             )}
           </div>
@@ -164,7 +156,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-

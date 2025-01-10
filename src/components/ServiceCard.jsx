@@ -1,6 +1,5 @@
 
 
-
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -11,44 +10,47 @@ const ServiceCard = ({ service }) => {
 
   return (
     <div
-      className={`mx-auto rounded-lg border space-y-2 p-4 shadow-lg overflow-hidden grid gap-4 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 ${isDark ? 'dark:bg-gray-800 dark:border-gray-600' : 'bg-white'}`}
+      className={`mx-auto rounded-lg border overflow-hidden shadow-lg transition-all transform hover:scale-105 duration-300 ease-in-out ${isDark ? 'dark:bg-gray-800 dark:border-gray-600' : 'bg-white'}`}
     >
-      <div className="lg:col-span-3 md:col-span-1 col-span-1">
+      <div className="relative">
+        {/* Service Image */}
         <img
-          className="w-full h-64 lg:h-[400px] rounded-lg object-cover"
+          className="w-full h-64 lg:h-[400px] rounded-t-lg object-cover"
           src={image}
           alt={title}
         />
+        <div className="absolute top-4 left-4 p-2 specialGradient text-white rounded-lg text-sm">
+          ${service_price.toFixed(2)}
+        </div>
       </div>
-      <div className="lg:col-span-2 md:col-span-1 col-span-1 flex flex-col justify-center">
-        <div className={`font-bold  mb-2 ${isDark ? 'text-blue-400' : 'text-blue-700'}`}>
-          Title: {title}
+
+      <div className="p-6 space-y-4">
+        {/* Title */}
+        <div className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          {title}
         </div>
-        <div>
-          <p className={`text-base ${isDark ? 'text-white' : 'text-gray-700'}`}>
-           <span className="font-bold"> Description:</span> {description?.substring(0, 100)}...
-          </p>
+
+        {/* Description */}
+        <div className={`text-base text-gray-600 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+          <span className="font-bold">Description:</span> {description?.substring(0, 100)}...
         </div>
-        <div>
-          <p className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Price: ${service_price.toFixed(2)}
-          </p>
-        </div>
-        <div className="flex items-center mt-4">
+
+        {/* Buyer Info */}
+        <div className="flex items-center space-x-4">
           <img
-            className="w-12 h-12 rounded-full border-2 border-blue-500 mr-4"
+            className="w-12 h-12 rounded-full border-2 border-blue-500"
             src={buyer?.photo}
             alt={buyer?.name}
           />
-          <div className="text-sm">
-            <p className={`leading-none ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Name: {buyer?.name}
-            </p>
+          <div>
+            <p className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>By {buyer?.name}</p>
           </div>
         </div>
-        <div className="text-center mt-4">
+
+        {/* View Detail Button */}
+        <div className="mt-4">
           <Link to={`/service-details/${_id}`}>
-            <button className=" specialGradient hover:bg-blue-700 text-white w-full font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+            <button className="w-full py-3 px-4 specialGradient text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out">
               View Detail
             </button>
           </Link>
@@ -59,4 +61,3 @@ const ServiceCard = ({ service }) => {
 };
 
 export default ServiceCard;
-

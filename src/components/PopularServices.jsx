@@ -15,7 +15,10 @@ const PopularServices = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });  // Initialize AOS with a duration of 1000ms
+    AOS.init({ duration: 1000,
+      once: true,
+      offset: 100, });  // Initialize AOS with a duration of 1000ms
+    
     fetchAllServices();
   }, []);
 
@@ -46,7 +49,7 @@ const PopularServices = () => {
 
       <div className="grid grid-cols-1 gap-6 my-10 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {services.slice(0, 6).map((service, index) => (
-          <div key={service._id} data-aos="fade-up" data-aos-delay={index * 100}>
+          <div key={service._id} data-aos="zoom-in" data-aos-delay={index * 100}>
             <ServiceCard service={service} />
           </div>
         ))}

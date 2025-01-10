@@ -1,4 +1,5 @@
 
+
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -25,12 +26,13 @@ const AllServices = () => {
       console.error("Error fetching services:", error);
     }
   };
-if(loading){
- 
-  return <Loading></Loading>
-}
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
   return (
-    <div className={`container mx-auto my-12 px-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+    <div className={`container mx-auto mt-20 mb-12 px-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
       {/* Search Bar */}
       <DynamicTitle></DynamicTitle>
       <div className="w-full my-4 py-2 sm:w-[400px] mx-auto mb-6">
@@ -45,55 +47,48 @@ if(loading){
       </div>
 
       <h1 className={`text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-black'}`}>All Services ({services.length})</h1>
-      <div className="flex flex-col gap-8">
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {services.map((service) => (
-          <div
-            key={service.id}
-            className={`p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-              {/* Service Image */}
-              <div className="w-full flex justify-center md:col-span-3">
+          <div key={service._id} className={`card bg-base-100 shadow-xl ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+            {/* Service Image */}
+            <figure>
+              <img
+                src={service.image}
+                alt={service.title}
+                className="object-cover w-full h-48 rounded-t-lg"
+              />
+            </figure>
+
+            {/* Card Body */}
+            <div className="card-body">
+              <h2 className="card-title">
+                {service.title}
+                <div className="badge badge-secondary">${service.service_price.toFixed(2)}</div>
+              </h2>
+              <p>
+                {service.description.length > 100
+                  ? `${service.description.substring(0, 100)}...`
+                  : service.description}
+              </p>
+
+              {/* Buyer Information */}
+              <div className="flex items-center mt-2">
                 <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full lg:h-[500px] object-cover rounded-lg"
+                  src={service.buyer.photo}
+                  alt={service.buyer.name}
+                  className="w-12 h-12 object-cover rounded-full border-2 border-gray-300"
                 />
+                <div className="ml-3">
+                  <p className="font-medium">{service.buyer.name}</p>
+                  <p className="text-sm text-gray-500">{service.area}</p>
+                </div>
               </div>
 
-              {/* Service Details */}
-              <div className="w-full md:w-2/3 flex flex-col justify-center md:col-span-2">
-                <div className="flex-grow flex flex-col justify-center">
-                  <h2 className={`text-2xl mt-4 md:mt-0 ${isDark ? 'text-white' : 'text-black'}`}> Title: {service.title}</h2>
-
-                  <p className={`font-bold ${isDark ? 'text-white' : 'text-black'}`}> Description:</p>
-                  <p className={`mt-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {service.description.length > 100
-                      ? `${service.description.substring(0, 100)}...`
-                      : service.description}
-                  </p>
-                </div>
-
-                <div className="flex items-center">
-                  <img
-                    src={service.buyer.photo}
-                    alt={service.buyer.name}
-                    className="w-12 h-12 object-cover rounded-full"
-                  />
-                  <div className="ml-3">
-                    <p className={`font-medium ${isDark ? 'text-white' : 'text-black'}`}>{service.buyer.name}</p>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <p className={` ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Area: {service.area}</p>
-                  <p className={` ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Price: ${service.service_price.toFixed(2)}</p>
-                </div>
-
+              {/* Card Footer */}
+              <div className="card-actions justify-start mt-4">
                 <Link to={`/service-details/${service._id}`}>
-                  <p className="mt-4 p-2  specialGradient text-white rounded-md hover:bg-blue-600 text-center">
-                    View Detail
-                  </p>
+                  <button className="btn text-white p-4 specialGradient">View Details</button>
                 </Link>
               </div>
             </div>
@@ -105,5 +100,3 @@ if(loading){
 };
 
 export default AllServices;
-
-

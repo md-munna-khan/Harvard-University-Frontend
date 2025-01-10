@@ -59,9 +59,9 @@ const MyBookedServices = () => {
                                     <thead className={isDark ? 'bg-gray-800' : 'bg-gray-50'}>
                                         <tr>
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Image</th>
-                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Current User Email</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right"> User Email</th>
                                           
-                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right"> Current User Name</th>
+                                            <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right"> User Name</th>
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right">Provider Email</th>
                                           
                                             <th className="py-3.5 px-4 text-md font-normal text-left rtl:text-right"> Provider Name</th>

@@ -90,17 +90,20 @@ const BookNow = () => {
     }
 
     return (
-        <div className={`p-6 w-full rounded-md my-10 shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
+        <div className={`p-6 w-full rounded-md  my-12 shadow-md md:min-h-[350px] ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-700'}`}>
             <h2 className={`font-semibold text-center text-2xl lg:text-4xl capitalize ${isDark ? 'text-white' : 'text-gray-700'}`}>
                 Place A Booking
             </h2>
             <form onSubmit={handleBidSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 <div className="md:col-span-1">
-                    <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceImage">Service Image</label>
-                    <img src={image} alt={title} className="block w-full h-auto mt-2 rounded-md" />
+                    <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceImage"></label>
+                    <img src={image} alt={title} className="block  w-full h-auto mt-2 rounded-md" />
                 </div>
                 <div>
-                    <div>
+
+
+                  <div className="md:flex  w-full gap-2">
+                  <div>
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceId">Service ID</label>
                         <input
                             id="serviceId"
@@ -124,7 +127,12 @@ const BookNow = () => {
                         />
                     </div>
 
-                    <div>
+                  </div>
+
+
+                  {/* <div className="md:flex  w-full gap-2"> </div> */}
+                  <div className="md:flex  w-full gap-2"> 
+                  <div>
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="providerEmail">Provider Email</label>
                         <input
                             id="providerEmail"
@@ -147,8 +155,11 @@ const BookNow = () => {
                             className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
                         />
                     </div>
+                  </div>
 
-                    <div>
+                   
+  <div className="md:flex  w-full gap-2">
+  <div>
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="currentUserEmail">Current User Email</label>
                         <input
                             id="currentUserEmail"
@@ -170,9 +181,10 @@ const BookNow = () => {
                             readOnly
                             className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
                         />
-                    </div>
-
-                    <div>
+                    </div> </div>
+                   
+             <div className="md:flex  w-full gap-2">
+                  <div>
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="servicePrice">Service Price</label>
                         <input
                             id="servicePrice"
@@ -183,19 +195,33 @@ const BookNow = () => {
                             className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
                         />
                     </div>
+                  <div>
+                        <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="servicePrice">Service Taking Date</label>
+                      
+                         <p > <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 flex text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                          dateFormat="MMMM d, yyyy"
+                          minDate={new Date()}
+                      />
+                       </p>
+                    </div>
 
-                    <div>
+                    {/* <div>
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="serviceTakingDate">Service Taking Date</label>
                         <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
-                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
+                            className={`block w-full px-4 py-2 mt-2 ${isDark ? 'bg-gray-700 flex text-white border-gray-600' : 'bg-white text-gray-700 border-black'} rounded-md border`}
                             dateFormat="MMMM d, yyyy"
                             minDate={new Date()}
                         />
+                    </div>  */}
                     </div>
+                  
 
-                    <div className="col-span-2">
+                    <div className=" col-span-2">
                         <label className={`${isDark ? 'text-white' : 'text-gray-700'}`} htmlFor="comment">Special Instruction</label>
                         <textarea
                             id="comment"
@@ -216,6 +242,7 @@ const BookNow = () => {
                     </div>
                 </div>
             </form>
+            
         </div>
     );
 };

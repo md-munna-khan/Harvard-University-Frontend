@@ -33,15 +33,15 @@ const ServiceDetails = () => {
   const { image, title, buyer, area, service_price, description } = services || {};
 
   return (
-    <>
-      <h2 className={`my-4 text-3xl text-center lg:text-5xl ${isDark ? 'text-white' : 'text-black'}`}>
+    <div className="mt-20">
+      <h2 className={` text-3xl text-center lg:text-5xl ${isDark ? 'text-black' : 'text-black'}`}>
         Service Details Page
       </h2>
-      <div className={`max-w-4xl mx-auto p-4 items-center justify-center my-10 rounded-lg shadow-md overflow-hidden lg:flex ${isDark ? 'bg-gray-800 text-white' : 'bg-white'}`}>
+      <div className={`max-w-4xl mx-auto p-4 items-center justify-center my-4 rounded-lg shadow-md overflow-hidden lg:flex ${isDark ? 'bg-gray-800 text-white' : 'bg-white'}`}>
         <img className="w-full lg:w-1/2 object-cover" src={image} alt={title} />
         <div className="lg:ml-4 lg:flex lg:flex-col lg:justify-between">
           <div className="px-6 py-4">
-            <div className="font-bold text-2xl mb-2">Tittle:{title}</div>
+            <div className="font-bold text-2xl mb-2">{title}</div>
             <p className="text-base mb-4"><span className="font-bold">Description:</span>{description}</p>
             <div>
               <span className="font-bold">price: ${service_price}</span>
@@ -61,7 +61,7 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
